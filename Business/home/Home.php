@@ -52,16 +52,23 @@ class Home extends Business
         $directora->makePerforado(true);
         $directora->makeAnillado();
         $directora->makeDecoracion();
-        $directora->makeImage("2021.svg", $color);
+        $directora->makeImage("2021.svg", $color, $tipo);
         $agenda = $builder->getProducto()->listar();
         return $agenda;
     }
     public function getAgenda()
     {
-        $data = $this->makeAgenda("Cuero", "naranja");
+        $tipoCubierta = strClean($_POST['tipoCubierta']);
+        $colorCubierta = strClean($_POST["colorCubierta"]);
+        if ($tipoCubierta != "" && $colorCubierta != "") {
+            $data = $this->makeAgenda($tipoCubierta, $colorCubierta);
 
-        $arrResponse = array('status' => true, 'data' => $data);
-        echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+            $arrResponse = array('status' => true, 'data' => $data);
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        } else {
+            $arrResponse = array('status' => false);
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
     }
 
     public function makeAlbum($tipo, $color)
@@ -73,14 +80,14 @@ class Home extends Business
         $directora->makeEncuadernado(true);
         $directora->makePegado();
         $directora->makeDecoracion();
-        $directora->makeImage("imagenes.svg", $color);
+        $directora->makeImage("imagenes.svg", $color, $tipo);
         $album = $builder->getProducto()->listar();
         return $album;
     }
     public function getAlbum()
     {
-        $tipoCubierta = strClean($_POST['tipoCubierta']);
-        $colorCubierta = strClean($_POST["colorCubierta"]);
+        $tipoCubierta = strClean($_POST['tipoCubiertaAlbum']);
+        $colorCubierta = strClean($_POST["colorCubiertaAlbum"]);
         if ($tipoCubierta != "" && $colorCubierta != "") {
             $data = $this->makeAlbum($tipoCubierta, $colorCubierta);
 

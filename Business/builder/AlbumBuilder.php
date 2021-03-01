@@ -43,9 +43,9 @@ class AlbumBuilder implements Builder
     {
         $this->album->partes[] = '<p><b>Decoracion: </b>Para decorar nuestra albun necesitaremos decorar la portada y llenar con las imagenes que deseamos</p>';
     }
-    public function buildImage($imagen, $color)
+    public function buildImage($imagen, $color, $tipo)
     {
-        $this->album->partes[] =  '<div class="book bg-' . $color . '"><div class="book-cover"><h5>Mi album</h5><br><img src="' . BASE_URL . 'assets/imgs/' . $imagen . '" alt="Album" style="width: 150px;"></div>';
+        $this->album->partes[] =  '<div class="book bg-' . $color . ' line-' . $tipo . '"><div class="book-cover"><h5>Mi album</h5><br><img src="' . BASE_URL . 'assets/imgs/' . $imagen . '" alt="Album" style="width: 150px;"></div>';
     }
 
     public function getProducto(): Album

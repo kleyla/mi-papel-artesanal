@@ -151,13 +151,63 @@ $("#papelPeriodico").click(function () {});
 $("#formAgenda").submit(function (event) {
   console.log("Submited");
   event.preventDefault();
+  if (
+    !$("input[name=tipoCubierta]").is(":checked") ||
+    !$("input[name=colorCubierta]").is(":checked")
+  ) {
+    alert("Seleccione los datos!");
+    return false;
+  }
   var formAgenda = document.querySelector("#formAgenda");
 
   var request = window.XMLHttpRequest
     ? new XMLHttpRequest()
     : new ActiveXObject("Microsoft.XMLHTTP");
-  var ajaxUrl = base_url + "home/getAlbum";
+  var ajaxUrl = base_url + "home/getAgenda";
   var formData = new FormData(formAgenda);
+  request.open("POST", ajaxUrl, true);
+  request.send(formData);
+  // console.log(request);
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 && request.status == 200) {
+      // console.log(request.responseText);
+      var objData = JSON.parse(request.responseText);
+      if (objData.status) {
+        $("#resultadoAgenda").empty();
+        contenido = "";
+        last = objData["data"].length - 1;
+        console.log(objData["data"]);
+        for (i = 0; i < objData["data"].length - 1; i++) {
+          console.log(objData["data"][i]);
+          contenido = contenido + objData["data"][i];
+        }
+        console.log(contenido);
+        bookCover = objData["data"][last];
+        bookBack = '<div class="book-back">' + contenido + "</div></div>";
+        book = bookCover + bookBack;
+        $("#resultadoAgenda").append(`<div>${book}</div>`);
+      }
+    }
+  };
+});
+
+$("#formAlbum").submit(function (event) {
+  console.log("Submited");
+  event.preventDefault();
+  if (
+    !$("input[name=tipoCubiertaAlbum]").is(":checked") ||
+    !$("input[name=colorCubiertaAlbum]").is(":checked")
+  ) {
+    alert("Seleccione los datos!");
+    return false;
+  }
+  var formAlbum = document.querySelector("#formAlbum");
+
+  var request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  var ajaxUrl = base_url + "home/getAlbum";
+  var formData = new FormData(formAlbum);
   request.open("POST", ajaxUrl, true);
   request.send(formData);
   // console.log(request);

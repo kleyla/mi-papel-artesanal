@@ -141,7 +141,7 @@ a {
   align-items: center;
   padding: 14px;
 }
-.book-cover h5{
+.book-cover h5 {
   font-size: 28px;
   text-align: center;
 }
@@ -200,4 +200,10 @@ form {
 }
 .txt-blue {
   color: blue;
+}
+.line-cuero {
+  border-left: 10px darkgoldenrod solid;
+}
+.line-carton {
+  border-left: 10px brown solid;
 }

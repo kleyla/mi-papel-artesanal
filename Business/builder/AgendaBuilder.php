@@ -24,7 +24,6 @@ class AgendaBuilder implements Builder
         if ($encuadernacion) {
             $this->agenda->partes[] = '<p><b>Encuadernado</b><br>Para el encuadernado realizamos un proceso de cosido de hojas</p>';
         }
-        
     }
     public function buildPerforado($perforacion)
     {
@@ -44,9 +43,9 @@ class AgendaBuilder implements Builder
     {
         $this->agenda->partes[] = '<p><b>Decoracion</b><br>Para decorar nuestra agenda necesitaremos muchos colores.. ademas de la portada con nuestro nombre, podemos hacer secciones que nos gustaria como uno de contactos, habitos, etc.</p>';
     }
-    public function buildImage($imagen, $color)
+    public function buildImage($imagen, $color, $tipo)
     {
-        $this->agenda->partes[] = '<div class="book bg-' . $color . '"><div class="book-cover"><h5>Mi agenda</h5><br><img src="' . BASE_URL . 'assets/imgs/' . $imagen . '" alt="Album" style="width: 150px;"></div>';
+        $this->agenda->partes[] = '<div class="book bg-' . $color . ' line-' . $tipo . '"><div class="book-cover"><h5>Mi agenda</h5><br><img src="' . BASE_URL . 'assets/imgs/' . $imagen . '" alt="Album" style="width: 150px;"></div>';
     }
 
     public function getProducto(): Agenda

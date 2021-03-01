@@ -35,9 +35,9 @@ class Directora
     {
         $this->builder->buildPegado();
     }
-    public function makeImage($imagen, $color)
+    public function makeImage($imagen, $color, $tipo)
     {
-        $this->builder->buildImage($imagen, $color);
+        $this->builder->buildImage($imagen, $color, $tipo);
     }
     public function makeDecoracion()
     {

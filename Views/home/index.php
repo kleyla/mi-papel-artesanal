@@ -59,12 +59,35 @@
                                 <br><br>
                                 <button class="btn btn-primary" type="submit">Confirmar</button>
                             </form><br>
-                            <div id="resultadoAlbum">
+                            <div id="resultadoAgenda">
 
                             </div>
                         </div>
                         <div class="col-6">
+                            <h2>Crea tu Album</h2>
+                            <form id="formAlbum">
+                                <h4>Tipo de Cubierta</h4>
+                                <input type="radio" name="tipoCubiertaAlbum" value="cuero" id="cueroAlbum">
+                                <label for="cueroAlbum">Cuero</label>
 
+                                <input type="radio" name="tipoCubiertaAlbum" value="carton" id="cartonAlbum">
+                                <label for="cartonAlbum">Carton</label>
+                                <br><br>
+                                <h4>Colores</h4>
+                                <input type="radio" name="colorCubiertaAlbum" value="naranja" id="naranjaAlbum">
+                                <label for="naranjaAlbum">Naranja</label>
+
+                                <input type="radio" name="colorCubiertaAlbum" value="verde" id="verdeAlbum">
+                                <label for="verdeAlbum">Verde</label>
+
+                                <input type="radio" name="colorCubiertaAlbum" value="amarillo" id="amarilloAlbum">
+                                <label for="amarilloAlbum">Amarillo</label>
+                                <br><br>
+                                <button class="btn btn-primary" type="submit">Confirmar</button>
+                            </form><br>
+                            <div id="resultadoAlbum">
+
+                            </div>
                         </div>
                     </div>
                 </div>
