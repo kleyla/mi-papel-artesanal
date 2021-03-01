@@ -76,6 +76,7 @@ p {
   padding: 16px 0;
 }
 .card-content {
+  width: 100%;
   text-align: center;
   padding: 16px 0;
 }
@@ -116,8 +117,8 @@ a {
   color: white;
 }
 .book {
-  width: 170px;
-  height: 220px;
+  width: 300px;
+  height: 400px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -126,53 +127,10 @@ a {
   padding: 10px;
   margin-left: 10px;
 }
-.bg-one {
-  background-color: var(--one);
-}
-.bg-one .book-border {
-  border: 10px solid var(--one);
-  box-shadow: inset 0px 0px 0px 2px white;
-  box-sizing: border-box;
-}
-.bg-two {
-  background-color: var(--two);
-}
-.bg-two .book-border {
-  border: 10px solid var(--two);
-  box-shadow: inset 0px 0px 0px 2px white;
-  box-sizing: border-box;
-}
-.bg-three {
-  background-color: var(--three);
-}
-.bg-three .book-border {
-  border: 10px solid var(--three);
-  box-shadow: inset 0px 0px 0px 2px white;
-  box-sizing: border-box;
-}
-.bg-four {
-  background-color: var(--four);
-}
-.bg-four .book-border {
-  border: 10px solid var(--four);
-  box-shadow: inset 0px 0px 0px 2px white;
-  box-sizing: border-box;
+.book img {
+  width: 100px !important;
 }
 
-.bg-five {
-  background-color: var(--six);
-}
-.bg-five .book-border {
-  border: 10px solid var(--six);
-  box-shadow: inset 0px 0px 0px 2px white;
-  box-sizing: border-box;
-}
-
-.book-back-border {
-  border: 10px solid var(--dark);
-  box-shadow: inset 0px 0px 0px 2px white;
-  box-sizing: border-box;
-}
 .book-cover {
   height: 100%;
   width: 100%;
@@ -183,7 +141,7 @@ a {
   align-items: center;
   padding: 14px;
 }
-.book-cover {
+.book-cover h5{
   font-size: 28px;
   text-align: center;
 }
@@ -218,4 +176,28 @@ a {
 }
 #content-instrucciones img {
   height: 300px !important;
+}
+.w-600 {
+  width: 600px;
+}
+.w-1000 {
+  width: 1000px;
+}
+.w-1200 {
+  width: 1200px;
+}
+form {
+  font-size: 20px !important;
+}
+.bg-naranja {
+  background-color: var(--two);
+}
+.bg-amarillo {
+  background-color: var(--four);
+}
+.bg-verde {
+  background-color: var(--three);
+}
+.txt-blue {
+  color: blue;
 }

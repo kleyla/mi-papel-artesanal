@@ -1,8 +1,11 @@
 <?php
-require_once("Business/builder/Directora.php");
 require_once("Business/templateMethod/PapelBond.php");
 require_once("Business/templateMethod/PapelArtesanal.php");
 require_once("Business/templateMethod/PapelPeriodico.php");
+
+require_once("Business/builder/Directora.php");
+require_once("Business/builder/AgendaBuilder.php");
+require_once("Business/builder/AlbumBuilder.php");
 
 class Home extends Business
 {
@@ -12,6 +15,8 @@ class Home extends Business
         $data["script"] = "home/script.js";
         $this->getView("home/index", $data);
     }
+
+    // Template Methd
 
     public function papelArtesanal()
     {
@@ -33,5 +38,57 @@ class Home extends Business
     public function getResult(PapelArtesanal $papel)
     {
         return $papel->prepararPapelArtesanal();
+    }
+
+    // Builder
+
+    public function makeAgenda($tipo, $color)
+    {
+        $directora = new Directora();
+        $builder = new AgendaBuilder();
+        $directora->setBuilder($builder);
+        $directora->makeCubierta($tipo);
+        // $directora->makeEncuadernado(false);
+        $directora->makePerforado(true);
+        $directora->makeAnillado();
+        $directora->makeDecoracion();
+        $directora->makeImage("2021.svg", $color);
+        $agenda = $builder->getProducto()->listar();
+        return $agenda;
+    }
+    public function getAgenda()
+    {
+        $data = $this->makeAgenda("Cuero", "naranja");
+
+        $arrResponse = array('status' => true, 'data' => $data);
+        echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function makeAlbum($tipo, $color)
+    {
+        $directora = new Directora();
+        $builder = new AlbumBuilder();
+        $directora->setBuilder($builder);
+        $directora->makeCubierta($tipo);
+        $directora->makeEncuadernado(true);
+        $directora->makePegado();
+        $directora->makeDecoracion();
+        $directora->makeImage("imagenes.svg", $color);
+        $album = $builder->getProducto()->listar();
+        return $album;
+    }
+    public function getAlbum()
+    {
+        $tipoCubierta = strClean($_POST['tipoCubierta']);
+        $colorCubierta = strClean($_POST["colorCubierta"]);
+        if ($tipoCubierta != "" && $colorCubierta != "") {
+            $data = $this->makeAlbum($tipoCubierta, $colorCubierta);
+
+            $arrResponse = array('status' => true, 'data' => $data);
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        } else {
+            $arrResponse = array('status' => false);
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
     }
 }

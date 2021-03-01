@@ -26,7 +26,6 @@ $("#startBuilder").click(function () {
   }, 1000);
 });
 
-
 $("#papelBond").click(function () {
   var request = window.XMLHttpRequest
     ? new XMLHttpRequest()
@@ -148,3 +147,39 @@ function back() {
   });
 }
 $("#papelPeriodico").click(function () {});
+
+$("#formAgenda").submit(function (event) {
+  console.log("Submited");
+  event.preventDefault();
+  var formAgenda = document.querySelector("#formAgenda");
+
+  var request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  var ajaxUrl = base_url + "home/getAlbum";
+  var formData = new FormData(formAgenda);
+  request.open("POST", ajaxUrl, true);
+  request.send(formData);
+  // console.log(request);
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 && request.status == 200) {
+      // console.log(request.responseText);
+      var objData = JSON.parse(request.responseText);
+      if (objData.status) {
+        $("#resultadoAlbum").empty();
+        contenido = "";
+        last = objData["data"].length - 1;
+        console.log(objData["data"]);
+        for (i = 0; i < objData["data"].length - 1; i++) {
+          console.log(objData["data"][i]);
+          contenido = contenido + objData["data"][i];
+        }
+        console.log(contenido);
+        bookCover = objData["data"][last];
+        bookBack = '<div class="book-back">' + contenido + "</div></div>";
+        book = bookCover + bookBack;
+        $("#resultadoAlbum").append(`<div>${book}</div>`);
+      }
+    }
+  };
+});

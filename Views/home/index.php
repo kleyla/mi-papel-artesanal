@@ -33,7 +33,44 @@
             </div>
         </div>
 
+        <div id="content-buider" class="hidden">
+            <div class="card bg-white w-1000">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-6">
+                            <h2>Crea tu Agenda</h2>
+                            <form id="formAgenda">
+                                <h4>Tipo de Cubierta</h4>
+                                <input type="radio" name="tipoCubierta" value="cuero" id="cuero">
+                                <label for="cuero">Cuero</label>
 
+                                <input type="radio" name="tipoCubierta" value="carton" id="carton">
+                                <label for="carton">Carton</label>
+                                <br><br>
+                                <h4>Colores</h4>
+                                <input type="radio" name="colorCubierta" value="naranja" id="naranja">
+                                <label for="naranja">Naranja</label>
+
+                                <input type="radio" name="colorCubierta" value="verde" id="verde">
+                                <label for="verde">Verde</label>
+
+                                <input type="radio" name="colorCubierta" value="amarillo" id="amarillo">
+                                <label for="amarillo">Amarillo</label>
+                                <br><br>
+                                <button class="btn btn-primary" type="submit">Confirmar</button>
+                            </form><br>
+                            <div id="resultadoAlbum">
+
+                            </div>
+                        </div>
+                        <div class="col-6">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 <?php footerPublic($data); ?>
