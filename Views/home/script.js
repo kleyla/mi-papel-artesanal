@@ -176,12 +176,10 @@ $("#formAgenda").submit(function (event) {
         $("#resultadoAgenda").empty();
         contenido = "";
         last = objData["data"].length - 1;
-        console.log(objData["data"]);
+
         for (i = 0; i < objData["data"].length - 1; i++) {
-          console.log(objData["data"][i]);
           contenido = contenido + objData["data"][i];
         }
-        console.log(contenido);
         bookCover = objData["data"][last];
         bookBack = '<div class="book-back">' + contenido + "</div></div>";
         book = bookCover + bookBack;
@@ -219,12 +217,10 @@ $("#formAlbum").submit(function (event) {
         $("#resultadoAlbum").empty();
         contenido = "";
         last = objData["data"].length - 1;
-        console.log(objData["data"]);
+
         for (i = 0; i < objData["data"].length - 1; i++) {
-          console.log(objData["data"][i]);
           contenido = contenido + objData["data"][i];
         }
-        console.log(contenido);
         bookCover = objData["data"][last];
         bookBack = '<div class="book-back">' + contenido + "</div></div>";
         book = bookCover + bookBack;
