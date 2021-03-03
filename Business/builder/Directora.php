@@ -35,12 +35,12 @@ class Directora
     {
         $this->builder->buildPegado($tipoPegamento);
     }
-    public function makeImage($imagen, $color, $tipo, $colorAnillos = "")
-    {
-        $this->builder->buildImage($imagen, $color, $tipo, $colorAnillos);
-    }
     public function makeDecoracion()
     {
         $this->builder->buildDecoracion();
+    }
+    public function makeImage($imagen, $color, $tipo, $colorAnillos = "")
+    {
+        $this->builder->buildImage($imagen, $color, $tipo, $colorAnillos);
     }
 }
