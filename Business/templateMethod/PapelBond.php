@@ -10,6 +10,6 @@ class PapelBond extends PapelArtesanal
     }
     protected function dejarSecar(): string
     {
-        return "Dejamos secar el papel por 24 horas...";
+        return "Dejamos secar por 24 horas mejor si lo exponemos al sol...";
     }
 }

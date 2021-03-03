@@ -76,7 +76,7 @@ $("#papelPeriodico").click(function () {
     : new ActiveXObject("Microsoft.XMLHTTP");
   var ajaxUrl = base_url + "home/papelPeriodico";
 
-  var strData = "dato=" + "papelBond";
+  var strData = "dato=" + "papelPeriodico";
 
   request.open("POST", ajaxUrl, true);
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -88,7 +88,7 @@ $("#papelPeriodico").click(function () {
       if (objData.status) {
         console.log(objData["data"]);
         instrucciones = `<div class="card bg-white"> 
-                          <div class="card-content"><h2>Con papel Bond los pasos son:</h2><br>
+                          <div class="card-content"><h2>Con papel Periodico los pasos son:</h2><br>
                             <div style="text-align: left;">`;
         for (i = 0; i < objData["data"].length; i++) {
           instrucciones =

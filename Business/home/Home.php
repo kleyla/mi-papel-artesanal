@@ -18,24 +18,21 @@ class Home extends Business
 
     // Template Methd
 
-    public function papelArtesanal()
-    {
-    }
     public function papelBond()
     {
-        $result = $this->getResult(new PapelBond());
+        $result = $this->getResultados(new PapelBond());
         // dep($result);
         $arrResponse = array('status' => true, 'data' => $result);
         echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
     }
     public function papelPeriodico()
     {
-        $result = $this->getResult(new PapelPeriodico());
+        $result = $this->getResultados(new PapelPeriodico());
         // dep($result);
         $arrResponse = array('status' => true, 'data' => $result);
         echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
     }
-    public function getResult(PapelArtesanal $papel)
+    public function getResultados(PapelArtesanal $papel)
     {
         return $papel->prepararPapelArtesanal();
     }
