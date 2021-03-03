@@ -7,8 +7,8 @@ interface Builder
     public function buildCubierta($tipo);
     public function buildEncuadernado($encuadernacion);
     public function buildPerforado($perforacion);
-    public function buildAnillado();
-    public function buildPegado();
+    public function buildAnillado($colorAnillos);
+    public function buildPegado($tipoPegamento);
     public function buildDecoracion();
-    public function buildImage($imagen, $color, $tipo);
+    public function buildImage($imagen, $color, $tipo, $colorAnillos);
 }

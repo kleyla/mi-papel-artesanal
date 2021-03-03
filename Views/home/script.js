@@ -153,7 +153,8 @@ $("#formAgenda").submit(function (event) {
   event.preventDefault();
   if (
     !$("input[name=tipoCubierta]").is(":checked") ||
-    !$("input[name=colorCubierta]").is(":checked")
+    !$("input[name=colorCubierta]").is(":checked") ||
+    !$("input[name=colorAnillos]").is(":checked")
   ) {
     alert("Seleccione los datos!");
     return false;
@@ -190,13 +191,14 @@ $("#formAgenda").submit(function (event) {
 });
 
 $("#formAlbum").submit(function (event) {
-  console.log("Submited");
+  console.log("Submiteddd");
   event.preventDefault();
   if (
-    !$("input[name=tipoCubiertaAlbum]").is(":checked") ||
-    !$("input[name=colorCubiertaAlbum]").is(":checked")
+    !$("input[name=colorCubiertaAlbum]").is(":checked") ||
+    !$("input[name=tipoPegamento]").is(":checked")
   ) {
     alert("Seleccione los datos!");
+    
     return false;
   }
   var formAlbum = document.querySelector("#formAlbum");

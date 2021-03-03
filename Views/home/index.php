@@ -40,14 +40,14 @@
                         <div class="col-6">
                             <h2>Crea tu Agenda</h2>
                             <form id="formAgenda">
-                                <h4>Tipo de Cubierta</h4>
-                                <input type="radio" name="tipoCubierta" value="cuero" id="cuero">
-                                <label for="cuero">Cuero</label>
+                                <p class="subtitle">Tipo de Cubierta:</p>
+                                <input type="radio" name="tipoCubierta" value="cuerina" id="cuerina">
+                                <label for="cuerina">Cuerina</label>
 
                                 <input type="radio" name="tipoCubierta" value="carton" id="carton">
                                 <label for="carton">Carton</label>
                                 <br><br>
-                                <h4>Colores</h4>
+                                <p class="subtitle">Colores:</p>
                                 <input type="radio" name="colorCubierta" value="naranja" id="naranja">
                                 <label for="naranja">Naranja</label>
 
@@ -56,6 +56,13 @@
 
                                 <input type="radio" name="colorCubierta" value="amarillo" id="amarillo">
                                 <label for="amarillo">Amarillo</label>
+                                <br><br>
+                                <p class="subtitle">Color del anillos:</p>
+                                <input type="radio" name="colorAnillos" value="dorado" id="dorado">
+                                <label for="dorado">Dorado</label>
+
+                                <input type="radio" name="colorAnillos" value="plateado" id="plateado">
+                                <label for="plateado">Plateado</label>
                                 <br><br>
                                 <button class="btn btn-primary" type="submit">Confirmar</button>
                             </form><br>
@@ -66,14 +73,7 @@
                         <div class="col-6">
                             <h2>Crea tu Album</h2>
                             <form id="formAlbum">
-                                <h4>Tipo de Cubierta</h4>
-                                <input type="radio" name="tipoCubiertaAlbum" value="cuero" id="cueroAlbum">
-                                <label for="cueroAlbum">Cuero</label>
-
-                                <input type="radio" name="tipoCubiertaAlbum" value="carton" id="cartonAlbum">
-                                <label for="cartonAlbum">Carton</label>
-                                <br><br>
-                                <h4>Colores</h4>
+                                <p class="subtitle">Colores:</p>
                                 <input type="radio" name="colorCubiertaAlbum" value="naranja" id="naranjaAlbum">
                                 <label for="naranjaAlbum">Naranja</label>
 
@@ -83,6 +83,14 @@
                                 <input type="radio" name="colorCubiertaAlbum" value="amarillo" id="amarilloAlbum">
                                 <label for="amarilloAlbum">Amarillo</label>
                                 <br><br>
+                                <p class="subtitle">Tipo de Pegamento:</p>
+                                <input type="radio" name="tipoPegamento" value="silicona" id="silicona">
+                                <label for="silicona">Silicona</label>
+
+                                <input type="radio" name="tipoPegamento" value="blanco" id="blanco">
+                                <label for="blanco">Blanco</label>
+                                <br><br>
+
                                 <button class="btn btn-primary" type="submit">Confirmar</button>
                             </form><br>
                             <div id="resultadoAlbum">

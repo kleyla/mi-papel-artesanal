@@ -27,17 +27,17 @@ class Directora
     {
         $this->builder->buildPerforado($perforacion);
     }
-    public function makeAnillado()
+    public function makeAnillado($colorAnillos)
     {
-        $this->builder->buildAnillado();
+        $this->builder->buildAnillado($colorAnillos);
     }
-    public function makePegado()
+    public function makePegado($tipoPegamento)
     {
-        $this->builder->buildPegado();
+        $this->builder->buildPegado($tipoPegamento);
     }
-    public function makeImage($imagen, $color, $tipo)
+    public function makeImage($imagen, $color, $tipo, $colorAnillos = "")
     {
-        $this->builder->buildImage($imagen, $color, $tipo);
+        $this->builder->buildImage($imagen, $color, $tipo, $colorAnillos);
     }
     public function makeDecoracion()
     {

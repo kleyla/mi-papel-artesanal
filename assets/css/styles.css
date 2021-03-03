@@ -160,6 +160,13 @@ a {
   padding: 14px;
 }
 .book-back p {
+  font-family: sans-serif !important;
+  font-size: 12px !important;
+}
+.book-back b {
+  font-size: 16px !important;
+}
+.book-back p {
   font-size: 20px;
 }
 .book:hover .book-back {
@@ -201,9 +208,25 @@ form {
 .txt-blue {
   color: blue;
 }
-.line-cuero {
+.line-cuerina {
   border-left: 10px darkgoldenrod solid;
 }
 .line-carton {
   border-left: 10px brown solid;
+}
+.subtitle {
+  display: inline;
+  margin-right: 20px;
+}
+.line-dorado {
+  border-left: 10px gold solid;
+}
+.line-plateado {
+  border-left: 10px silver solid;
+}
+.line-top-cuerina {
+  border-top: 10px darkgoldenrod solid;
+}
+.line-top-carton {
+  border-top: 10px brown solid;
 }
