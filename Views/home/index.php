@@ -10,8 +10,8 @@
                     </div><br>
                     <!-- <a href="<?= base_url(); ?>papel" class="btn btn-primary">Hacer papel artesanal</a> -->
                     <div class="row row-center">
-                        <button class="btn btn-primary" id="start">Guia papel artesanal</button>
-                        <button class="btn btn-primary" id="startBuilder">Hacer Agenda o Album</button>
+                        <button class="btn btn-primary" id="start">Guia para reciclar</button>
+                        <button class="btn btn-primary" id="startBuilder">Hacer mi Agenda o Album</button>
                     </div>
                 </div>
             </div>
