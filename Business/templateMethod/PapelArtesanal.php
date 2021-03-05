@@ -27,7 +27,7 @@ abstract class PapelArtesanal
     {
         return "Limpiamos el papel, es decir lo separamos de tapas, anillos de encuadernacion, cintas adhesiva...";
     }
-    public function picarPapel()
+    protected function picarPapel()
     {
         return "Picamos el papel en pequeños pedacitos...";
     }

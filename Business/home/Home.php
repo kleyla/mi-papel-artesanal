@@ -32,7 +32,7 @@ class Home extends Business
         $arrResponse = array('status' => true, 'data' => $result);
         echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
     }
-    public function getResultados(PapelArtesanal $papel)
+    private function getResultados(PapelArtesanal $papel)
     {
         return $papel->prepararPapelArtesanal();
     }
@@ -54,7 +54,7 @@ class Home extends Business
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         }
     }
-    public function makeAgenda($tipo, $color, $colorAnillos)
+    private function makeAgenda($tipo, $color, $colorAnillos)
     {
         $directora = new Directora();
         $builder = new AgendaBuilder();
@@ -79,7 +79,7 @@ class Home extends Business
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         }
     }
-    public function makeAlbum($color, $tipoPegamento)
+    private function makeAlbum($color, $tipoPegamento)
     {
         $directora = new Directora();
         $builder = new AlbumBuilder();
