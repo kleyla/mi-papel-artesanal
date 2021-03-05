@@ -10,5 +10,5 @@ interface Builder
     public function buildAnillado($colorAnillos);
     public function buildPegado($tipoPegamento);
     public function buildDecoracion();
-    public function buildImage($imagen, $color, $tipo, $colorAnillos);
+    public function buildImagen($imagen, $color, $tipo, $colorAnillos);
 }

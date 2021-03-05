@@ -33,17 +33,17 @@ class AlbumBuilder implements Builder
     }
     public function buildAnillado($colorAnillos)
     {
-        $this->album->partes[] = '<p><b>Anillado:</b><br>Para la union de nuestras tapas y las hojas necesitamos unos aros de color ' . $colorAnillos . ', y procedemos a anillarlo</p>';
+        $this->album->partes[] = '<p><b>Anillado:</b><br>Para la unión de nuestras tapas y las hojas necesitamos unos aros de color ' . $colorAnillos . ', y procedemos a anillarlo</p>';
     }
     public function buildPegado($tipoPegamento)
     {
-        $this->album->partes[] = '<p><b>Pegado:</b><br>Para la union de nuestras tapas y las hojas necesitamos pegamento ' . $tipoPegamento . ' y dejarlos secar.</p>';
+        $this->album->partes[] = '<p><b>Pegado:</b><br>Para la unión de nuestras tapas y las hojas necesitamos pegamento ' . $tipoPegamento . ' y dejarlos secar.</p>';
     }
     public function buildDecoracion()
     {
-        $this->album->partes[] = '<p><b>Decoracion:</b><br>Para decorar nuestra albun necesitaremos decorar la portada y llenar con las imagenes que deseamos</p>';
+        $this->album->partes[] = '<p><b>Decoración:</b><br>Para decorar nuestra álbum necesitaremos decorar la portada y llenar con las imagenes que deseamos</p>';
     }
-    public function buildImage($imagen, $color, $tipo, $colorAnillos)
+    public function buildImagen($imagen, $color, $tipo, $colorAnillos)
     {
         $this->album->partes[] =  '<div class="book bg-' . $color . ' line-' . $tipo . '"><div class="book-cover"><h5>Mi album</h5><br><img src="' . BASE_URL . 'assets/imgs/' . $imagen . '" alt="Album" style="width: 150px;"></div>';
     }

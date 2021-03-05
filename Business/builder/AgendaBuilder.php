@@ -33,17 +33,17 @@ class AgendaBuilder implements Builder
     }
     public function buildAnillado($colorAnillos)
     {
-        $this->agenda->partes[] = '<p><b>Anillado:</b><br>Para la union de nuestras tapas y las hojas necesitamos unos aros de color ' . $colorAnillos . ', y procedemos a anillarlo</p>';
+        $this->agenda->partes[] = '<p><b>Anillado:</b><br>Para la unión de nuestras tapas y las hojas necesitamos unos aros de color ' . $colorAnillos . ', y procedemos a anillarlo</p>';
     }
     public function buildPegado($tipoPegamento)
     {
-        $this->agenda->partes[] = '<p><b>Pegado:</b><br>Para la union de nuestras tapas y las hojas necesitamos pegamento ' . $tipoPegamento . ' y dejarlos secar.</p>';
+        $this->agenda->partes[] = '<p><b>Pegado:</b><br>Para la unión de nuestras tapas y las hojas necesitamos pegamento ' . $tipoPegamento . ' y dejarlos secar.</p>';
     }
     public function buildDecoracion()
     {
-        $this->agenda->partes[] = '<p><b>Decoracion:</b><br>Para decorar nuestra agenda necesitaremos muchos colores.. ademas de la portada con nuestro nombre, podemos hacer secciones que nos gustaria como uno de contactos, habitos, etc.</p>';
+        $this->agenda->partes[] = '<p><b>Decoración:</b><br>Para decorar nuestra agenda necesitaremos muchos colores.. además de la portada con nuestro nombre, podemos hacer secciones que nos gustaría como uno de contactos, hábitos, etc.</p>';
     }
-    public function buildImage($imagen, $color, $tipo, $colorAnillos)
+    public function buildImagen($imagen, $color, $tipo, $colorAnillos)
     {
         $this->agenda->partes[] = '<div class="book bg-' . $color . ' line-top-' . $tipo . ' line-' . $colorAnillos . '"><div class="book-cover"><h5>Mi agenda</h5><br><img src="' . BASE_URL . 'assets/imgs/' . $imagen . '" alt="Album" style="width: 150px;"></div>';
     }

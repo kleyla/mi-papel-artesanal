@@ -15,32 +15,20 @@ class Directora
         $this->builder = $builder;
     }
 
-    public function makeCubierta($tipo)
+    public function construirAgenda($tipo, $color, $colorAnillos)
     {
         $this->builder->buildCubierta($tipo);
-    }
-    public function makeEncuadernado($encuadernacion)
-    {
-        $this->builder->buildEncuadernado($encuadernacion);
-    }
-    public function makePerforado($perforacion)
-    {
-        $this->builder->buildPerforado($perforacion);
-    }
-    public function makeAnillado($colorAnillos)
-    {
+        $this->builder->buildPerforado(true);
         $this->builder->buildAnillado($colorAnillos);
-    }
-    public function makePegado($tipoPegamento)
-    {
-        $this->builder->buildPegado($tipoPegamento);
-    }
-    public function makeDecoracion()
-    {
         $this->builder->buildDecoracion();
+        $this->builder->buildImagen("2021.svg", $color, $tipo, $colorAnillos);
     }
-    public function makeImage($imagen, $color, $tipo, $colorAnillos = "")
+    public function construirAlbum($color, $tipoPegamento)
     {
-        $this->builder->buildImage($imagen, $color, $tipo, $colorAnillos);
+        $this->builder->buildCubierta("carton");
+        $this->builder->buildEncuadernado(true);
+        $this->builder->buildPegado($tipoPegamento);
+        $this->builder->buildDecoracion();
+        $this->builder->buildImagen("imagenes.svg", $color, "carton", "");
     }
 }

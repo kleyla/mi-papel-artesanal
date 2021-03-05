@@ -39,7 +39,6 @@ class Home extends Business
 
     // Builder
 
-
     public function getAgenda()
     {
         $tipoCubierta = strClean($_POST['tipoCubierta']);
@@ -60,11 +59,8 @@ class Home extends Business
         $directora = new Directora();
         $builder = new AgendaBuilder();
         $directora->setBuilder($builder);
-        $directora->makeCubierta($tipo);
-        $directora->makePerforado(true);
-        $directora->makeAnillado($colorAnillos);
-        $directora->makeDecoracion();
-        $directora->makeImage("2021.svg", $color, $tipo, $colorAnillos);
+        $directora->construirAgenda($tipo, $color, $colorAnillos);
+
         $agenda = $builder->getProducto()->listar();
         return $agenda;
     }
@@ -88,11 +84,8 @@ class Home extends Business
         $directora = new Directora();
         $builder = new AlbumBuilder();
         $directora->setBuilder($builder);
-        $directora->makeCubierta("carton");
-        $directora->makeEncuadernado(true);
-        $directora->makePegado($tipoPegamento);
-        $directora->makeDecoracion();
-        $directora->makeImage("imagenes.svg", $color, "carton");
+        $directora->construirAlbum($color, $tipoPegamento);
+
         $album = $builder->getProducto()->listar();
         return $album;
     }
