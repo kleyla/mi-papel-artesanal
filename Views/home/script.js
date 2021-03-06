@@ -42,7 +42,7 @@ $("#papelBond").click(function () {
     if (request.readyState == 4 && request.status == 200) {
       var objData = JSON.parse(request.responseText);
       if (objData.status) {
-        console.log(objData["data"]);
+        // console.log(objData["data"]);
         instrucciones = `<div class="card bg-white"> 
                           <div class="card-content"><h2>Con papel Bond los pasos son:</h2><br>
                             <div style="text-align: left;">`;
@@ -86,7 +86,7 @@ $("#papelPeriodico").click(function () {
     if (request.readyState == 4 && request.status == 200) {
       var objData = JSON.parse(request.responseText);
       if (objData.status) {
-        console.log(objData["data"]);
+        // console.log(objData["data"]);
         instrucciones = `<div class="card bg-white"> 
                           <div class="card-content"><h2>Con papel Periodico los pasos son:</h2><br>
                             <div style="text-align: left;">`;
@@ -149,14 +149,19 @@ function back() {
 $("#papelPeriodico").click(function () {});
 
 $("#formAgenda").submit(function (event) {
-  console.log("Submited");
+  // console.log("Submited");
   event.preventDefault();
   if (
     !$("input[name=tipoCubierta]").is(":checked") ||
     !$("input[name=colorCubierta]").is(":checked") ||
     !$("input[name=colorAnillos]").is(":checked")
   ) {
-    alert("Seleccione los datos!");
+    // alert("Seleccione los datos!");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debes seleccionar los campos!",
+    });
     return false;
   }
   var formAgenda = document.querySelector("#formAgenda");
@@ -191,14 +196,18 @@ $("#formAgenda").submit(function (event) {
 });
 
 $("#formAlbum").submit(function (event) {
-  console.log("Submiteddd");
+  // console.log("Submiteddd");
   event.preventDefault();
   if (
     !$("input[name=colorCubiertaAlbum]").is(":checked") ||
     !$("input[name=tipoPegamento]").is(":checked")
   ) {
-    alert("Seleccione los datos!");
-    
+    // alert("Seleccione los datos!");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debes seleccionar los campos!",
+    });
     return false;
   }
   var formAlbum = document.querySelector("#formAlbum");

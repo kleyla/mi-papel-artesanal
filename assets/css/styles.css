@@ -227,3 +227,6 @@ form {
 .line-top-carton {
   border-top: 10px brown solid;
 }
+.swal2-popup {
+  font-family: sans-serif !important;
+}
