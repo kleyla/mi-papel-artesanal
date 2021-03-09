@@ -26,189 +26,131 @@ $("#startBuilder").click(function () {
   }, 1000);
 });
 
-$("#formPapelBond").submit(function (event) {
-  event.preventDefault();
-  console.log("Submited");
-  if (!$("#cantidadPapelBond").val()) {
-    // alert("Seleccione los datos!");
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Debes llenar el campo!",
-    });
-    return false;
+$("#comprarAgenda").click(function () {
+  hideContentBuilder();
+  $("#item").val("agenda");
+  $("#detalleItem").text("Agenda de 20bs");
+});
+$("#comprarAlbum").click(function () {
+  hideContentBuilder();
+  $("#item").val("album");
+  $("#detalleItem").text("Album de 15bs");
+});
+
+function hideContentBuilder() {
+  $("#content-buider").addClass("animate__animated animate__backOutLeft");
+  setTimeout(function () {
+    $("#content-buider").removeClass(
+      "container animate__animated animate__backInRight animate__backOutLeft"
+    );
+    $("#content-buider").addClass("hidden");
+    $("#content-payment").removeClass("hidden");
+    $("#content-payment").addClass(
+      "container animate__animated animate__backInRight"
+    );
+  }, 1000);
+}
+
+$("input[type=radio][name=payment]").change(function () {
+  // console.log("payment");
+  if (this.value == "pagoTarjeta") {
+    $("#formPagoCampos").empty();
+    formTarjeta();
   }
-  var formPapelBond = document.querySelector("#formPapelBond");
+  if (this.value == "pagoPaypal") {
+    $("#formPagoCampos").empty();
 
-  var request = window.XMLHttpRequest
-    ? new XMLHttpRequest()
-    : new ActiveXObject("Microsoft.XMLHTTP");
-  var ajaxUrl = base_url + "home/papelBond";
-  var formData = new FormData(formPapelBond);
-  request.open("POST", ajaxUrl, true);
-  request.send(formData);
-  // console.log(request);
-  request.onreadystatechange = function () {
-    if (request.readyState == 4 && request.status == 200) {
-      // console.log(request.responseText);
-      var objData = JSON.parse(request.responseText);
-      if (objData.status) {
-
-        $("#resultadoInstruccionesPapelBond").empty();
-        // console.log(objData["data"]);
-        instrucciones = "";
-        for (i = 0; i < objData["data"].length; i++) {
-          instrucciones =
-            instrucciones +
-            "<p>" +
-            (i + 1) +
-            ". " +
-            objData["data"][i] +
-            "</p>";
-        }
-        $("#resultadoInstruccionesPapelBond").append(
-          `<div class="txt-inst">${instrucciones} <img class="papel-img" src="${base_url}assets/imgs/papelBond.jpg" alt='Papel'></div>`
-        );
-      }
-    }
-  };
-});
-
-$("#formPapelPeriodico").submit(function (event) {
-  event.preventDefault();
-  console.log("Submited");
-  if (!$("#cantidadPapelPeriodico").val()) {
-    // alert("Seleccione los datos!");
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Debes llenar el campo!",
-    });
-    return false;
+    formPaypal();
   }
-  var formPapelPeriodico = document.querySelector("#formPapelPeriodico");
+  if (this.value == "pagoBitcoin") {
+    $("#formPagoCampos").empty();
+    formPaypal();
+  }
+  calcularTotal();
+});
+$("#cantidadPedido").change(function () {
+  cantidad = this.value;
+  $("#detalleCantidad").text(cantidad);
 
-  var request = window.XMLHttpRequest
-    ? new XMLHttpRequest()
-    : new ActiveXObject("Microsoft.XMLHTTP");
-  var ajaxUrl = base_url + "home/papelPeriodico";
-  var formData = new FormData(formPapelPeriodico);
-  request.open("POST", ajaxUrl, true);
-  request.send(formData);
-  // console.log(request);
-  request.onreadystatechange = function () {
-    if (request.readyState == 4 && request.status == 200) {
-      // console.log(request.responseText);
-      var objData = JSON.parse(request.responseText);
-      if (objData.status) {
-
-        $("#resultadoInstruccionesPapelPeriodico").empty();
-        // console.log(objData["data"]);
-        instrucciones = "";
-        for (i = 0; i < objData["data"].length; i++) {
-          instrucciones =
-            instrucciones +
-            "<p>" +
-            (i + 1) +
-            ". " +
-            objData["data"][i] +
-            "</p>";
-        }
-        $("#resultadoInstruccionesPapelPeriodico").append(
-          `<div class="txt-inst">${instrucciones} <img class="papel-img" src="${base_url}assets/imgs/periodico.jpg" alt='Papel'></div>`
-        );
-      }
-    }
-  };
+  $("#detalleEnvio").text(parseFloat(cantidad) * 10 + " bs");
+  calcularTotal();
+});
+$("#cupon").change(function () {
+  $("#detalleCupon").text(this.value);
+  calcularTotal();
 });
 
-$("#papelBond").click(function () {
-  var request = window.XMLHttpRequest
-    ? new XMLHttpRequest()
-    : new ActiveXObject("Microsoft.XMLHTTP");
-  var ajaxUrl = base_url + "home/papelBond";
+function calcularTotal() {
+  total = getTotal();
 
-  var strData = "dato=" + "papelBond";
+  $("#detalleTotal").text(total);
+}
+function getTotal() {
+  if ($("#item").val() == "agenda") {
+    monto = 20;
+  } else {
+    monto = 15;
+  }
+  cantidad = $("#cantidadPedido").val();
+  // console.log("Cantidad " + cantidad);
+  descuentoCupon = getDescuentoCupon();
+  // console.log("descuentoCupon " + descuentoCupon);
+  descuentoMetodo = getDescuentoMetodo();
+  // console.log("descuentoMetodo " + descuentoMetodo);
+  costoEnvio = parseFloat(cantidad) * 10;
+  // console.log("costoEnvio " + costoEnvio);
 
-  request.open("POST", ajaxUrl, true);
-  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  request.send(strData);
-  // console.log(request);
-  request.onreadystatechange = function () {
-    if (request.readyState == 4 && request.status == 200) {
-      var objData = JSON.parse(request.responseText);
-      if (objData.status) {
-        // console.log(objData["data"]);
-        instrucciones = `<div class="card bg-white"> 
-                          <div class="card-content"><h2>Con papel Bond los pasos son:</h2><br>
-                            <div style="text-align: left;">`;
-        for (i = 0; i < objData["data"].length; i++) {
-          instrucciones =
-            instrucciones +
-            "<p>" +
-            (i + 1) +
-            ". " +
-            objData["data"][i] +
-            "</p>";
-        }
-        instrucciones =
-          instrucciones +
-          `</div><br><img src="${base_url}assets/imgs/periodico.jpg" alt='Papel'>
-          <br><button class="btn btn-primary" id="backPaper">Atras</button>
-                                        </div></div>`;
+  total =
+    monto *
+      parseFloat(cantidad) *
+      (1 - descuentoCupon) *
+      (1 - descuentoMetodo) +
+    costoEnvio;
+  return Math.round(total * 100) / 100;
+}
+function cuponExiste() {
+  return $("#cupon").val() === "MARCH2021";
+}
+function getDescuentoCupon() {
+  if ($("#cupon").val() === "MARCH2021") {
+    return 0.2;
+  } else {
+    return 0;
+  }
+}
+function getDescuentoMetodo() {
+  // console.log("Descuento metodo");
+  // console.log($("input[type=radio][name=payment]:checked").val());
+  if ($("input[type=radio][name=payment]:checked").val() == "pagoTarjeta") {
+    return 0.08;
+  }
+  if ($("input[type=radio][name=payment]:checked").val() == "pagoPaypal") {
+    return 0;
+  }
+  if ($("input[type=radio][name=payment]:checked").val() == "pagoBitcoin") {
+    return 0.15;
+  }
+  return 0;
+}
+function formTarjeta() {
+  campos = `<label for="nroTarjeta">Nro tarjeta:</label>
+    <input type="number" id="nroTarjeta" name="nroTarjeta">
 
-        $("#content-instrucciones").append(instrucciones);
+    <label for="mesAnhoTarjeta">MM/AA:</label>
+    <input type="text" step="1" id="mesAnhoTarjeta" name="mesAnhoTarjeta">
 
-        hideCardPaper();
-        back();
-      }
-    }
-  };
-});
+    <label for="cvvTarjeta">CVV:</label>
+    <input type="number" id="cvvTarjeta" name="cvvTarjeta">`;
+  $("#formPagoCampos").append(campos);
+}
+function formPaypal() {
+  campos = `<label for="emailPaypal">Email:</label>
+    <input type="email" id="emailPaypal" name="emailPaypal">
 
-$("#papelPeriodico").click(function () {
-  var request = window.XMLHttpRequest
-    ? new XMLHttpRequest()
-    : new ActiveXObject("Microsoft.XMLHTTP");
-  var ajaxUrl = base_url + "home/papelPeriodico";
-
-  var strData = "dato=" + "papelPeriodico";
-
-  request.open("POST", ajaxUrl, true);
-  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  request.send(strData);
-  // console.log(request);
-  request.onreadystatechange = function () {
-    if (request.readyState == 4 && request.status == 200) {
-      var objData = JSON.parse(request.responseText);
-      if (objData.status) {
-        // console.log(objData["data"]);
-        instrucciones = `<div class="card bg-white"> 
-                          <div class="card-content"><h2>Con papel Periodico los pasos son:</h2><br>
-                            <div style="text-align: left;">`;
-        for (i = 0; i < objData["data"].length; i++) {
-          instrucciones =
-            instrucciones +
-            "<p>" +
-            (i + 1) +
-            ". " +
-            objData["data"][i] +
-            "</p>";
-        }
-        instrucciones =
-          instrucciones +
-          `</div><br><br><img src="${base_url}assets/imgs/periodico.jpg" alt='Papel'>
-          <br><button class="btn btn-primary" id="backPaper">Atras</button>
-                                        </div></div>`;
-
-        $("#content-instrucciones").append(instrucciones);
-
-        hideCardPaper();
-        back();
-      }
-    }
-  };
-});
+    <label for="passPaypal">Contraseña:</label>
+    <input type="password" id="passPaypal" name="passPaypal">`;
+  $("#formPagoCampos").append(campos);
+}
 
 function hideCardPaper() {
   $("#content-papel").addClass("animate__animated animate__backOutLeft");
@@ -242,6 +184,123 @@ function back() {
     }, 1000);
   });
 }
+$("#formPago").submit(function (event) {
+  event.preventDefault();
+
+  var formPago = document.querySelector("#formPago");
+
+  var request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  var ajaxUrl = base_url + "home/pagar";
+  var formData = new FormData(formPago);
+  request.open("POST", ajaxUrl, true);
+  request.send(formData);
+  // console.log(request);
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 && request.status == 200) {
+      var objData = JSON.parse(request.responseText);
+      console.log(objData);
+      if (objData.status) {
+        // $("#resultadoAgenda").empty();
+        // contenido = "";
+        // last = objData["data"].length - 1;
+        monto = getTotal();
+
+        let timerInterval;
+        Swal.fire({
+          title: "Empezando transaccion!",
+          html: "Inicializando pago en <b></b> millisegundos.",
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            timerInterval = setInterval(() => {
+              const content = Swal.getContent();
+              if (content) {
+                const b = content.querySelector("b");
+                if (b) {
+                  b.textContent = Swal.getTimerLeft();
+                }
+              }
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            let timerInterval;
+            Swal.fire({
+              title: "Verificacion de Transaccion!",
+              html:
+                objData["data"]["verificacion"] + "<br><b></b> millisegundos.",
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading();
+                timerInterval = setInterval(() => {
+                  const content = Swal.getContent();
+                  if (content) {
+                    const b = content.querySelector("b");
+                    if (b) {
+                      b.textContent = Swal.getTimerLeft();
+                    }
+                  }
+                }, 100);
+              },
+              willClose: () => {
+                clearInterval(timerInterval);
+              },
+            }).then((result) => {
+              /* Read more about handling dismissals below */
+              if (result.dismiss === Swal.DismissReason.timer) {
+                let timerInterval;
+                Swal.fire({
+                  title: "Realizando transaccion!",
+                  html:
+                    objData["data"]["transaccion"] +
+                    "<br> <b></b> milliseconds.",
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: () => {
+                    Swal.showLoading();
+                    timerInterval = setInterval(() => {
+                      const content = Swal.getContent();
+                      if (content) {
+                        const b = content.querySelector("b");
+                        if (b) {
+                          b.textContent = Swal.getTimerLeft();
+                        }
+                      }
+                    }, 100);
+                  },
+                  willClose: () => {
+                    clearInterval(timerInterval);
+                  },
+                }).then((result) => {
+                  /* Read more about handling dismissals below */
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    Swal.fire({
+                      icon: "success",
+                      title: "Transaccion exitosa",
+                      text:
+                        "La transaccion de " +
+                        monto +
+                        " bs fue realizada exitosamente!",
+                    });
+                    document.getElementById("formPago").reset();
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+    }
+  };
+});
 
 $("#formAgenda").submit(function (event) {
   // console.log("Submited");

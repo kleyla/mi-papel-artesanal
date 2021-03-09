@@ -26,27 +26,30 @@
                     <div class="row ">
                         <div class="col-6">
                             <h2>De papel bond</h2>
-                            <form id="formPapelBond">
-                                <label for="cantidadPapelBond">Cantidad (kg):</label>
-                                <input type="text" id="cantidadPapelBond" name="cantidadPapelBond">
-
-                                <button class="btn btn-primary" type="submit">Listo</button>
-                            </form>
-                            <div id="resultadoInstruccionesPapelBond">
-
+                            <div class="txt-inst">
+                                <p>1. Limpiamos el papel, es decir lo separamos de tapas, anillos de encuadernacion, cintas adhesiva...</p>
+                                <p>2. Picamos el papel en pequeños pedacitos...</p>
+                                <p>3. Dejamos remojando el papel en abundante agua por todo un dia...</p>
+                                <p>4. Si notamos que el papel aun no esta como pulpa, lo podemos licuar...</p>
+                                <p>5. Agregar decorativos a bond: Se puede agregar colores acrilicos como hojitas de flores secas...</p>
+                                <p>6. Formamos el papel con ayuda de los marcos de madera... </p>
+                                <p>7. Dejamos secar por 24 horas mejor si lo exponemos al sol...</p>
+                                <br>
+                                <img class="papel-img" src="<?= base_url(); ?>assets/imgs/papelBond.jpg" alt='Papel'>
                             </div>
                         </div>
                         <div class="col-6">
                             <h2>De papel periodico</h2>
-                            <form id="formPapelPeriodico">
-
-                                <label for="cantidadPapelPeriodico">Cantidad (kg):</label>
-                                <input type="text" id="cantidadPapelPeriodico" name="cantidadPapelPeriodico">
-
-                                <button class="btn btn-primary" type="submit">De papel periodico</button>
-                            </form>
-                            <div id="resultadoInstruccionesPapelPeriodico">
-
+                            <div class="txt-inst">
+                                <p>1. Limpiamos el papel, de cintas adhesiva u otros...</p>
+                                <p>2. Picamos el papel en pequeños pedacitos...</p>
+                                <p>3. Dejamos remojando el papel en abundante agua por todo un dia...</p>
+                                <p>4. Si notamos que el papel aun no esta como pulpa, lo podemos licuar...</p>
+                                <p>5. Agregar decorativos al periodico: Se podria agregar hojitas de flores secas...</p>
+                                <p>6. Formamos el papel con ayuda de los marcos de madera... </p>
+                                <p>7. Dejamos secar por 12 horas al aire libre...</p>
+                                <br>
+                                <img class="papel-img" src="<?= base_url(); ?>assets/imgs/periodico.jpg" alt='periodico'>
                             </div>
                         </div>
                     </div>
@@ -60,7 +63,7 @@
                 <div class="card-content">
                     <div class="row">
                         <div class="col-6">
-                            <h2>Crea tu Agenda</h2>
+                            <h2>Crea tu Agenda (20 bs)</h2>
                             <form id="formAgenda">
                                 <p class="subtitle">Tipo de Cubierta:</p>
                                 <input type="radio" name="tipoCubierta" value="cuerina" id="cuerina">
@@ -91,9 +94,12 @@
                             <div id="resultadoAgenda">
 
                             </div>
+                            <br>
+                            <button class="btn btn-primary" id="comprarAgenda">Comprar</button>
+
                         </div>
                         <div class="col-6">
-                            <h2>Crea tu Album</h2>
+                            <h2>Crea tu Album (15 bs)</h2>
                             <form id="formAlbum">
                                 <p class="subtitle">Colores:</p>
                                 <input type="radio" name="colorCubiertaAlbum" value="naranja" id="naranjaAlbum">
@@ -118,11 +124,65 @@
                             <div id="resultadoAlbum">
 
                             </div>
+                            <br>
+                            <button class="btn btn-primary" id="comprarAlbum">Comprar</button>
                         </div>
                     </div>
                 </div>
             </div>
 
+        </div>
+        <div id="content-payment" class="hidden">
+            <div class="card bg-white">
+                <div class="card-content">
+                    <h2>Pago</h2>
+                    <div id="detallesPago">
+                        <p><b>Item: </b><span id="detalleItem"></span></p>
+                        <p><b>Cantidad: </b><span id="detalleCantidad"></span></p>
+                        <p><b>Cupon: </b><span id="detalleCupon"></span></p>
+                        <p><b>Envio (10bs c/u): </b><span id="detalleEnvio"></span></p>
+                        <p><b>Total: </b><span id="detalleTotal"></span></p>
+                    </div>
+                    <form id="formPago">
+                        <input type="text" name="item" id="item" value="" hidden>
+
+                        <div class="row row-center">
+                            <h4>Metodo de pago</h4>
+                            <div>
+                                <input type="radio" id="pagoPaypal" name="payment" value="pagoPaypal">
+                                <label for="pagoPaypal">
+                                    <img src="<?= media(); ?>imgs/paypal.svg" alt="paypal" class="w-100">
+                                </label>
+                            </div>
+                            <div>
+                                <input type="radio" id="pagoTarjeta" name="payment" value="pagoTarjeta">
+                                <label for="pagoTarjeta">
+                                    <img class="w-100" src="<?= media(); ?>imgs/tarjeta-de-credito.svg" alt="tarjeta">
+                                </label>
+                            </div>
+                            <div>
+                                <input type="radio" id="pagoBitcoin" name="payment" value="pagoBitcoin">
+                                <label for="pagoBitcoin">
+                                    <img src="<?= media(); ?>imgs/bitcoin.svg" alt="bitcoin" class="w-100">
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <label for="cantidadPedido">Cantidad:</label>
+                        <input type="number" step="1" id="cantidadPedido" name="cantidadPedido" value="0">
+                        <br>
+                        <label for="cupon">Cupon:</label>
+                        <input type="text" step="1" id="cupon" name="cupon">
+                        <br>
+                        <div id="formPagoCampos">
+
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">Confirmar</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
