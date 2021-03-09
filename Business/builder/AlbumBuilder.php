@@ -41,7 +41,7 @@ class AlbumBuilder implements Builder
     }
     public function buildDecoracion()
     {
-        $this->album->partes[] = '<p><b>Decoración:</b><br>Para decorar nuestra álbum necesitaremos decorar la portada y llenar con las imagenes que deseamos</p>';
+        $this->album->partes[] = '<p><b>Decoración:</b><br>Necesitaremos decorar la portada y llenar con las imagenes que deseamos</p>';
     }
     public function buildImagen($imagen, $color, $tipo, $colorAnillos)
     {

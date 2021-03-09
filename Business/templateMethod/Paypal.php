@@ -3,7 +3,7 @@ require_once("Business/templateMethod/Pago.php");
 
 class Paypal extends Pago
 {
-    const DESCUENTO = 0.08;
+    const DESCUENTO = 0;
 
     protected function calcularTotal($parcial, $descuentoCupon, $costoEnvio)
     {

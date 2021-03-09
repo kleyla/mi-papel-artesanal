@@ -3,23 +3,19 @@
 abstract class Pago
 {
     const CLAVES = [
-        array("clave" => "MARCH2021", "descuento" => 0.2),
-        array("clave" => "marchTech", "descuento" => 0.3)
+        array("clave" => "MARCH2021", "descuento" => 0.2)
     ];
     const COSTO_ENVIO = 10;
 
     final public function realizarPago($datos, $cupon, $monto, $cantidad)
     {
-        // $resultado = [];
-
         $resultado["inicio"] = $this->inicializar();
         $descuentoCupon =   $this->verificarCupon($cupon);
-        // $resultado["descuentoCupon"] = $descuento;
-        // echo $descuentoCupon;
+
         $costoEnvio = $this->calcularMontoEnvio($cantidad);
-        // echo $costoEnvio;
+
         $parcial = $this->calcularParcial($monto, $cantidad);
-        echo $parcial;
+
         $resultado["total"] = $this->calcularTotal($parcial, $descuentoCupon, $costoEnvio);
         $resultado["verificacion"] = $this->verificarMetodo($datos);
         $resultado["transaccion"] = $this->realizarTransaccion();
@@ -27,7 +23,7 @@ abstract class Pago
     }
     protected function inicializar()
     {
-        return "Inicializando el pago...";
+        return "Inicializando pago...";
     }
     protected function verificarCupon($clave)
     {
@@ -42,7 +38,7 @@ abstract class Pago
     }
     protected function calcularParcial($monto, $cantidad)
     {
-        return $monto * $cantidad;
+        return doubleval($monto) * intval($cantidad);
     }
     protected function calcularMontoEnvio($cantidad)
     {

@@ -3,7 +3,7 @@ require_once("Business/templateMethod/Pago.php");
 
 class Tarjeta extends Pago
 {
-    const DESCUENTO = 0;
+    const DESCUENTO = 0.8;
 
     protected function calcularTotal($parcial, $descuentoCupon, $costoEnvio)
     {

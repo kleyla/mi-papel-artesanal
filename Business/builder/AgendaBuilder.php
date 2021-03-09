@@ -41,7 +41,7 @@ class AgendaBuilder implements Builder
     }
     public function buildDecoracion()
     {
-        $this->agenda->partes[] = '<p><b>Decoración:</b><br>Para decorar nuestra agenda necesitaremos muchos colores.. además de la portada con nuestro nombre, podemos hacer secciones que nos gustaría como uno de contactos, hábitos, etc.</p>';
+        $this->agenda->partes[] = '<p><b>Decoración:</b><br>Necesitaremos muchos colores.. además de la portada con nuestro nombre, podemos hacer secciones que nos gustaría como uno de contactos, hábitos, etc.</p>';
     }
     public function buildImagen($imagen, $color, $tipo, $colorAnillos)
     {

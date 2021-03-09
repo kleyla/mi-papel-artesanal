@@ -1,8 +1,4 @@
 <?php
-require_once("Business/templateMethod/PapelBond.php");
-require_once("Business/templateMethod/PapelArtesanal.php");
-require_once("Business/templateMethod/PapelPeriodico.php");
-
 require_once("Business/templateMethod/Pago.php");
 require_once("Business/templateMethod/Tarjeta.php");
 require_once("Business/templateMethod/Paypal.php");
@@ -23,35 +19,70 @@ class Home extends Business
 
     // Template Method
 
-    public function papelBond()
+    public function pagar()
     {
-        $cantidadPapelBond = doubleval($_POST['cantidadPapelBond']);
-        if ($cantidadPapelBond > 0) {
-            $result = $this->getResultados(new PapelBond(), $cantidadPapelBond);
-            // dep($result);
-            $arrResponse = array('status' => true, 'data' => $result);
-            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        $cantidad = intval($_POST['cantidadPedido']);
+        $cupon = strClean($_POST['cupon']);
+
+        $item = strClean($_POST['item']);
+
+        if ($item == "agenda") {
+            $monto = 20;
         } else {
-            $arrResponse = array('status' => false);
-            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+            $monto = 15;
+        }
+
+        $tipoMetodo = strClean($_POST['payment']);
+        // echo $tipoMetodo;
+
+        switch ($tipoMetodo) {
+            case 'pagoPaypal':
+                $datos["nro"] = strClean($_POST['emailPaypal']);
+                $datos["pass"] = strClean($_POST['passPaypal']);
+
+                $resultados = $this->getResultadoPaypal($datos, $monto, $cupon, $cantidad);
+                $arrResponse = array('status' => true, 'data' => $resultados);
+                echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+                break;
+            case 'pagoTarjeta':
+                $datos["nro"] = strClean($_POST['nroTarjeta']);
+                $datos["mesAnho"] = strClean($_POST['mesAnhoTarjeta']);
+                $datos["cvv"] = strClean($_POST['cvvTarjeta']);
+
+                $resultados = $this->getResultadoTarjeta($datos, $monto, $cupon, $cantidad);
+                $arrResponse = array('status' => true, 'data' => $resultados);
+                echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+                break;
+            case 'pagoBitcoin':
+                $datos["nro"] = strClean($_POST['emailPaypal']);
+                $datos["pass"] = strClean($_POST['passPaypal']);
+
+                $resultados = $this->getResultadoBitcoin($datos, $monto, $cupon, $cantidad);
+                $arrResponse = array('status' => true, 'data' => $resultados);
+                echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+                break;
+
+            default:
+                $arrResponse = array('status' => false);
+                echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+                break;
         }
     }
-    public function papelPeriodico()
+    private function getResultadoTarjeta($datos, $monto, $cupon, $cantidad)
     {
-        $cantidadPapelPeriodico = doubleval($_POST['cantidadPapelPeriodico']);
-        if ($cantidadPapelPeriodico > 0) {
-            $result = $this->getResultados(new PapelPeriodico(), $cantidadPapelPeriodico);
-            // dep($result);
-            $arrResponse = array('status' => true, 'data' => $result);
-            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
-        } else {
-            $arrResponse = array('status' => false);
-            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
-        }
+        return $this->getResultado(new Tarjeta(), $datos, $cupon, $monto, $cantidad);
     }
-    private function getResultados(PapelArtesanal $papel, $cantidad)
+    private function getResultadoPaypal($datos, $monto, $cupon, $cantidad)
     {
-        return $papel->prepararPapelArtesanal($cantidad);
+        return $this->getResultado(new Paypal(), $datos, $cupon, $monto, $cantidad);
+    }
+    private function getResultadoBitcoin($datos, $monto, $cupon, $cantidad)
+    {
+        return $this->getResultado(new Bitcoin(), $datos, $cupon, $monto, $cantidad);
+    }
+    private function getResultado(Pago $pago, $datos, $monto, $cupon, $cantidad)
+    {
+        return $pago->realizarPago($datos, $cupon, $monto, $cantidad);
     }
 
     // Builder
@@ -106,6 +137,8 @@ class Home extends Business
         $album = $builder->getProducto()->listar();
         return $album;
     }
+
+    // mis pruebas
 
     public function tarjeta()
     {
