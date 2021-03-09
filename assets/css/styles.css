@@ -117,8 +117,8 @@ a {
   color: white;
 }
 .book {
-  width: 300px;
-  height: 400px;
+  width: 280px;
+  height: 380px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -239,4 +239,7 @@ form {
 .papel-img {
   /* width: 150px !important; */
   height: 150px !important;
+}
+.w-100 {
+  width: 100px;
 }
