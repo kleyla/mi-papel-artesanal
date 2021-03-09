@@ -20,14 +20,36 @@
 
         </div>
         <div id="content-papel" class="hidden">
-            <div class="card bg-white animate__animated animate__bounceInRight animate__slow">
-                <h3 class="card-title">Comencemos a hacer papel artesanal</h3>
+            <div class="card bg-white min-w-1000 animate__animated animate__bounceInRight animate__slow">
+
                 <div class="card-content">
-                    <p>Da click segun el papel que tengas</p>
-                </div><br>
-                <div class="row row-center">
-                    <button class="btn btn-primary" id="papelBond">De papel bond</button>
-                    <button class="btn btn-primary" id="papelPeriodico">De papel periodico</button>
+                    <div class="row ">
+                        <div class="col-6">
+                            <h2>De papel bond</h2>
+                            <form id="formPapelBond">
+                                <label for="cantidadPapelBond">Cantidad (kg):</label>
+                                <input type="text" id="cantidadPapelBond" name="cantidadPapelBond">
+
+                                <button class="btn btn-primary" type="submit">Listo</button>
+                            </form>
+                            <div id="resultadoInstruccionesPapelBond">
+
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h2>De papel periodico</h2>
+                            <form id="formPapelPeriodico">
+
+                                <label for="cantidadPapelPeriodico">Cantidad (kg):</label>
+                                <input type="text" id="cantidadPapelPeriodico" name="cantidadPapelPeriodico">
+
+                                <button class="btn btn-primary" type="submit">De papel periodico</button>
+                            </form>
+                            <div id="resultadoInstruccionesPapelPeriodico">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

@@ -20,21 +20,33 @@ class Home extends Business
 
     public function papelBond()
     {
-        $result = $this->getResultados(new PapelBond());
-        // dep($result);
-        $arrResponse = array('status' => true, 'data' => $result);
-        echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        $cantidadPapelBond = doubleval($_POST['cantidadPapelBond']);
+        if ($cantidadPapelBond > 0) {
+            $result = $this->getResultados(new PapelBond(), $cantidadPapelBond);
+            // dep($result);
+            $arrResponse = array('status' => true, 'data' => $result);
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        } else {
+            $arrResponse = array('status' => false);
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
     }
     public function papelPeriodico()
     {
-        $result = $this->getResultados(new PapelPeriodico());
-        // dep($result);
-        $arrResponse = array('status' => true, 'data' => $result);
-        echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        $cantidadPapelPeriodico = doubleval($_POST['cantidadPapelPeriodico']);
+        if ($cantidadPapelPeriodico > 0) {
+            $result = $this->getResultados(new PapelPeriodico(), $cantidadPapelPeriodico);
+            // dep($result);
+            $arrResponse = array('status' => true, 'data' => $result);
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        } else {
+            $arrResponse = array('status' => false);
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
     }
-    private function getResultados(PapelArtesanal $papel)
+    private function getResultados(PapelArtesanal $papel, $cantidad)
     {
-        return $papel->prepararPapelArtesanal();
+        return $papel->prepararPapelArtesanal($cantidad);
     }
 
     // Builder

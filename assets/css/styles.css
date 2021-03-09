@@ -230,3 +230,13 @@ form {
 .swal2-popup {
   font-family: sans-serif !important;
 }
+.txt-inst {
+  font-size: 14px !important;
+}
+.min-w-1000 {
+  min-width: 1000px;
+}
+.papel-img {
+  /* width: 150px !important; */
+  height: 150px !important;
+}

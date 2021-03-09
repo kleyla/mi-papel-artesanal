@@ -26,6 +26,102 @@ $("#startBuilder").click(function () {
   }, 1000);
 });
 
+$("#formPapelBond").submit(function (event) {
+  event.preventDefault();
+  console.log("Submited");
+  if (!$("#cantidadPapelBond").val()) {
+    // alert("Seleccione los datos!");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debes llenar el campo!",
+    });
+    return false;
+  }
+  var formPapelBond = document.querySelector("#formPapelBond");
+
+  var request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  var ajaxUrl = base_url + "home/papelBond";
+  var formData = new FormData(formPapelBond);
+  request.open("POST", ajaxUrl, true);
+  request.send(formData);
+  // console.log(request);
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 && request.status == 200) {
+      // console.log(request.responseText);
+      var objData = JSON.parse(request.responseText);
+      if (objData.status) {
+
+        $("#resultadoInstruccionesPapelBond").empty();
+        // console.log(objData["data"]);
+        instrucciones = "";
+        for (i = 0; i < objData["data"].length; i++) {
+          instrucciones =
+            instrucciones +
+            "<p>" +
+            (i + 1) +
+            ". " +
+            objData["data"][i] +
+            "</p>";
+        }
+        $("#resultadoInstruccionesPapelBond").append(
+          `<div class="txt-inst">${instrucciones} <img class="papel-img" src="${base_url}assets/imgs/papelBond.jpg" alt='Papel'></div>`
+        );
+      }
+    }
+  };
+});
+
+$("#formPapelPeriodico").submit(function (event) {
+  event.preventDefault();
+  console.log("Submited");
+  if (!$("#cantidadPapelPeriodico").val()) {
+    // alert("Seleccione los datos!");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debes llenar el campo!",
+    });
+    return false;
+  }
+  var formPapelPeriodico = document.querySelector("#formPapelPeriodico");
+
+  var request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  var ajaxUrl = base_url + "home/papelPeriodico";
+  var formData = new FormData(formPapelPeriodico);
+  request.open("POST", ajaxUrl, true);
+  request.send(formData);
+  // console.log(request);
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 && request.status == 200) {
+      // console.log(request.responseText);
+      var objData = JSON.parse(request.responseText);
+      if (objData.status) {
+
+        $("#resultadoInstruccionesPapelPeriodico").empty();
+        // console.log(objData["data"]);
+        instrucciones = "";
+        for (i = 0; i < objData["data"].length; i++) {
+          instrucciones =
+            instrucciones +
+            "<p>" +
+            (i + 1) +
+            ". " +
+            objData["data"][i] +
+            "</p>";
+        }
+        $("#resultadoInstruccionesPapelPeriodico").append(
+          `<div class="txt-inst">${instrucciones} <img class="papel-img" src="${base_url}assets/imgs/periodico.jpg" alt='Papel'></div>`
+        );
+      }
+    }
+  };
+});
+
 $("#papelBond").click(function () {
   var request = window.XMLHttpRequest
     ? new XMLHttpRequest()
@@ -57,7 +153,7 @@ $("#papelBond").click(function () {
         }
         instrucciones =
           instrucciones +
-          `</div><br><img src="${base_url}assets/imgs/papelBond.jpg" alt='Papel'>
+          `</div><br><img src="${base_url}assets/imgs/periodico.jpg" alt='Papel'>
           <br><button class="btn btn-primary" id="backPaper">Atras</button>
                                         </div></div>`;
 
@@ -146,7 +242,6 @@ function back() {
     }, 1000);
   });
 }
-$("#papelPeriodico").click(function () {});
 
 $("#formAgenda").submit(function (event) {
   // console.log("Submited");

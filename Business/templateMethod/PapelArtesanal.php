@@ -5,15 +5,15 @@ abstract class PapelArtesanal
     /**
      * Template method
      */
-    final public function prepararPapelArtesanal()
+    final public function prepararPapelArtesanal($kg)
     {
         $resultado = [];
         array_push($resultado, $this->limpiarPapel());
         array_push($resultado, $this->picarPapel());
-        array_push($resultado, $this->remojarPapel());
+        array_push($resultado, $this->remojarPapel($kg));
         array_push($resultado, $this->licuarPapel());
         array_push($resultado, $this->agregarDecorativos());
-        array_push($resultado, $this->formarHojas());
+        array_push($resultado, $this->formarHojas($kg));
         array_push($resultado, $this->dejarSecar());
         return $resultado;
     }
@@ -31,10 +31,19 @@ abstract class PapelArtesanal
     {
         return "Picamos el papel en pequeños pedacitos...";
     }
-    /**Dejamos remojar el papel */
-    protected function remojarPapel()
+    public function calcularAgua($kg)
     {
-        return "Dejamos remojando el papel en abuntante agua por todo un dia...";
+        $total = $kg * 5;
+        return $total;
+    }
+    public function calcularHojas($kg)
+    {
+        return round($kg * 45);
+    }
+    /**Dejamos remojar el papel */
+    protected function remojarPapel($kg)
+    {
+        return "Dejamos remojando el papel en " . $this->calcularAgua($kg) . " litros agua por todo un dia...";
     }
     /**
      * Licuamos el papel
@@ -45,9 +54,9 @@ abstract class PapelArtesanal
     }
 
     /**Formamos el papel */
-    protected function formarHojas()
+    protected function formarHojas($kg)
     {
-        return "Formamos el papel con ayuda de los marcos de madera...";
+        return "Formamos el papel con ayuda de los marcos de madera... nos saldran al rededor de " . $this->calcularHojas($kg) . " hojas";
     }
     /**Renderizar */
     protected function render()
