@@ -3,6 +3,11 @@ require_once("Business/templateMethod/PapelBond.php");
 require_once("Business/templateMethod/PapelArtesanal.php");
 require_once("Business/templateMethod/PapelPeriodico.php");
 
+require_once("Business/templateMethod/Pago.php");
+require_once("Business/templateMethod/Tarjeta.php");
+require_once("Business/templateMethod/Paypal.php");
+require_once("Business/templateMethod/Bitcoin.php");
+
 require_once("Business/builder/Directora.php");
 require_once("Business/builder/AgendaBuilder.php");
 require_once("Business/builder/AlbumBuilder.php");
@@ -16,7 +21,7 @@ class Home extends Business
         $this->getView("home/index", $data);
     }
 
-    // Template Methd
+    // Template Method
 
     public function papelBond()
     {
@@ -100,5 +105,38 @@ class Home extends Business
 
         $album = $builder->getProducto()->listar();
         return $album;
+    }
+
+    public function tarjeta()
+    {
+        $datos["nro"] = 12345678;
+        $monto = 20;
+        $cupon = "MARCH2021";
+        $cantidad = 2;
+        $response = $this->getResponse(new Tarjeta(), $datos, $monto, $cupon, $cantidad);
+        dep($response);
+    }
+    public function paypal()
+    {
+        $datos["nro"] = 23456789;
+        $monto = 20;
+        $cupon = "MARCH20211";
+        $cantidad = 2;
+        $response = $this->getResponse(new Paypal(), $datos, $monto, $cupon, $cantidad);
+        dep($response);
+    }
+    public function bitcoin()
+    {
+        $datos["nro"] = 345678912;
+        $monto = 20;
+        $cupon = "MARCH20211";
+        $cantidad = 2;
+        $response = $this->getResponse(new Bitcoin(), $datos, $monto, $cupon, $cantidad);
+        dep($response);
+    }
+
+    private function getResponse(Pago $pago, $datos, $monto, $cupon, $cantidad)
+    {
+        return $pago->realizarPago($datos, $cupon, $monto, $cantidad);
     }
 }
